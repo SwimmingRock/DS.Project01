@@ -132,3 +132,18 @@ def get_json_files(directory_path: str) -> str:
         print("No Shots found in this subdirectory.")
 
 # END: ___________READ A LIST OF ALL CREATED SHOTS___________
+
+
+# BEGIN: ___________READ INFORMATION FOR A SINGLE SHOT___________
+def get_json_file_info(directory_path: str, file_name: str) -> Dict:
+    file_path = os.path.join(directory_path, file_name)
+
+    if os.path.exists(file_path) and file_name.endswith(".json"):
+        with open(file_path, 'r') as file:
+            json_data = json.load(file)
+        return json_data
+    else:
+        print(f"JSON file '{file_name}' does not exist in the specified directory.")
+        return None
+    
+# END: ___________READ INFORMATION FOR A SINGLE SHOT___________
