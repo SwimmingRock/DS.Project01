@@ -147,3 +147,17 @@ def get_json_file_info(directory_path: str, file_name: str) -> Dict:
         return None
     
 # END: ___________READ INFORMATION FOR A SINGLE SHOT___________
+
+
+# BEGIN: ___________UPDATE THE DATA FOR A SHOT___________
+def edit_json_file(directory_path: str, file_name: str, new_data: Dict) -> bool:
+    file_path = os.path.join(directory_path, file_name)
+
+    if os.path.exists(file_path) and file_name.endswith(".json"):
+        with open(file_path, 'w') as file:
+            json.dump(new_data, file, indent=4)
+        print(f"JSON file '{file_name}' has been successfully updated!")
+    else:
+        print(f"JSON file '{file_name}' does not exist in the specified directory.")
+
+# END: ___________UPDATE THE DATA FOR A SHOT___________
