@@ -60,3 +60,18 @@ def get_description_file(directory_path: str, subdir_name: str) -> Dict:
         return None
 
 # END: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
+
+
+# BEGIN: ___________UPDATE THE DATA FOR A SHOW___________
+def update_description_file(directory_path: str, subdir_name: str, description: Dict) -> bool:
+    subdir_path = os.path.join(directory_path, subdir_name)
+    description_file = os.path.join(subdir_path, "description.json")
+
+    if os.path.exists(description_file):
+        with open(description_file, 'w') as file:
+            json.dump(description, file, indent=4)
+        print(f"Description file in '{subdir_name}' subdirectory updated successfully!")
+    else:
+        print(f"Description file does not exist in '{subdir_name}' subdirectory.")
+
+# END: ___________UPDATE THE DATA FOR A SHOW___________
