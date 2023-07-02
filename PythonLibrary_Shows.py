@@ -176,3 +176,56 @@ def delete_json_file(directory_path: str, file_name: str) -> bool:
 # END: ___________DELETE A SHOT___________
 
 # ==================================================================================== END SHOTS ====================================================================================
+
+
+
+# ==================================================================================== BEGIN EXAMPLE USAGE SHOWS ====================================================================================
+
+# BEGIN: ___________CREATE NEW SHOWS___________
+directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1"
+directory_name = "Animal_Kingdom"
+subdirectories = ["Dogs", "Cats", "Birds", "Bunnys"]
+create_subdirectories(directory_path, directory_name, subdirectories)
+
+# END: ___________CREATE NEW SHOWS___________
+
+
+# BEGIN: ___________READ A LIST OF ALL CREATED SHOWS___________
+subdirectories_list = get_subdirectories(os.path.join(directory_path, directory_name))
+print(subdirectories_list)
+
+# END: ___________READ A LIST OF ALL CREATED SHOWS___________
+
+
+# BEGIN: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
+subdir_path = os.path.join(directory_path, directory_name, "Cats")
+description = {
+    "Description": "This show is about a family of Cats in the Animal Kingdom",
+}
+create_json_file(subdir_path, "description.json", description)
+
+chosen_subdirectory = "Dogs"
+description = get_description_file(os.path.join(directory_path, directory_name), chosen_subdirectory)
+if description is not None:
+    print(description)
+
+# END: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
+
+"""
+# BEGIN: ___________UPDATE THE DATA FOR A SHOW___________
+chosen_subdirectory = "Cats"
+updated_description = {
+    "Description": "This show is about a family of Cats in the Animal Kingdom. It follows their adventures and daily lives.",
+}
+update_description_file(os.path.join(directory_path, directory_name), chosen_subdirectory, updated_description)
+
+# END: ___________UPDATE THE DATA FOR A SHOW___________
+
+
+# BEGIN: ___________DELETE A SHOW___________
+subdirectory_to_delete = "Cats"
+delete_subdirectory(os.path.join(directory_path, directory_name), subdirectory_to_delete)
+
+# END: ___________DELETE A SHOW___________
+"""
+# ==================================================================================== END EXAMPLE USAGE SHOWS ====================================================================================
