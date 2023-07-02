@@ -75,3 +75,18 @@ def update_description_file(directory_path: str, subdir_name: str, description: 
         print(f"Description file does not exist in '{subdir_name}' subdirectory.")
 
 # END: ___________UPDATE THE DATA FOR A SHOW___________
+
+
+# BEGIN: ___________DELETE A SHOW___________
+def delete_subdirectory(directory_path: str, subdirectory_name: str) -> bool:
+    subdirectory_path = os.path.join(directory_path, subdirectory_name)
+
+    if os.path.exists(subdirectory_path):
+        shutil.rmtree(subdirectory_path)
+        print(f"Subdirectory '{subdirectory_name}' and its contents have been deleted successfully!")
+    else:
+        print(f"Subdirectory '{subdirectory_name}' does not exist.")
+
+# END: ___________DELETE A SHOW___________
+
+# ==================================================================================== END SHOWS ====================================================================================
