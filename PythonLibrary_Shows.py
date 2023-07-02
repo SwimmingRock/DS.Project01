@@ -113,3 +113,22 @@ def create_character_info(directory_path: str, file_name: str, character_name: s
         print(f"Character file '{character_file}' created successfully!")
 
 # END: ___________CREATE NEW SHOTS WITHIN A SHOW___________
+
+
+# BEGIN: ___________READ A LIST OF ALL CREATED SHOTS___________
+def get_json_files(directory_path: str) -> str:
+    json_files = []
+
+    for file_name in os.listdir(directory_path):
+        file_path = os.path.join(directory_path, file_name)
+        if file_name.endswith(".json") and file_name != "description.json":
+            json_files.append(file_name)
+
+    if len(json_files) > 0:
+        print("The Shots in this subdirectory are:")
+        for file_name in json_files:
+            print(file_name)
+    else:
+        print("No Shots found in this subdirectory.")
+
+# END: ___________READ A LIST OF ALL CREATED SHOTS___________
