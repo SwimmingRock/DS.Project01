@@ -29,3 +29,34 @@ def create_subdirectories(directory_path: str, directory_name: str, subdirectori
         create_directory(main_directory_path, subdirectory)
 
 # END: ___________CREATE NEW SHOWS/READ A LIST OF ALL CREATED SHOWS___________
+
+
+# BEGIN: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
+def create_json_file(directory_path: str, filename: str, data: Dict) -> List[str]:
+    file_path = os.path.join(directory_path, filename)
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+    print(f"JSON file '{filename}' created successfully!")
+
+def get_subdirectories(directory_path: str) -> List[str]:
+    subdirectories = []
+
+    for entry in os.scandir(directory_path):
+        if entry.is_dir():
+            subdirectories.append(entry.name)
+
+    return subdirectories
+
+def get_description_file(directory_path: str, subdir_name: str) -> Dict:
+    subdir_path = os.path.join(directory_path, subdir_name)
+    description_file = os.path.join(subdir_path, "description.json")
+
+    if os.path.exists(description_file):
+        with open(description_file, 'r') as file:
+            description = json.load(file)
+        return description
+    else:
+        print(f"Description file does not exist in '{subdir_name}' subdirectory.")
+        return None
+
+# END: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
