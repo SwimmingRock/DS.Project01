@@ -90,3 +90,26 @@ def delete_subdirectory(directory_path: str, subdirectory_name: str) -> bool:
 # END: ___________DELETE A SHOW___________
 
 # ==================================================================================== END SHOWS ====================================================================================
+
+
+
+# ==================================================================================== BEGIN SHOTS ====================================================================================
+
+# BEGIN: ___________CREATE NEW SHOTS WITHIN A SHOW___________
+def create_character_info(directory_path: str, file_name: str, character_name: str, info: Dict) -> bool:
+    # Create the directory if it doesn't exist
+    os.makedirs(directory_path, exist_ok=True)
+
+    # Create the character's JSON file
+    character_file = os.path.join(directory_path, f"{file_name}.json")
+
+    # Check if the file already exists
+    if os.path.exists(character_file):
+        print(f"Character file '{character_file}' already exists.")
+    else:
+        # Create the JSON file and write the information
+        with open(character_file, 'w') as file:
+            json.dump(info, file, indent=4)
+        print(f"Character file '{character_file}' created successfully!")
+
+# END: ___________CREATE NEW SHOTS WITHIN A SHOW___________
