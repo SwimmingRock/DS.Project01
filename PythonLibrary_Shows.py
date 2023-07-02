@@ -161,3 +161,18 @@ def edit_json_file(directory_path: str, file_name: str, new_data: Dict) -> bool:
         print(f"JSON file '{file_name}' does not exist in the specified directory.")
 
 # END: ___________UPDATE THE DATA FOR A SHOT___________
+
+
+# BEGIN: ___________DELETE A SHOT___________
+def delete_json_file(directory_path: str, file_name: str) -> bool:
+    file_path = os.path.join(directory_path, file_name)
+
+    if os.path.exists(file_path) and file_name.endswith(".json"):
+        os.remove(file_path)
+        print(f"JSON file '{file_name}' has been successfully deleted!")
+    else:
+        print(f"JSON file '{file_name}' does not exist in the specified directory.")
+
+# END: ___________DELETE A SHOT___________
+
+# ==================================================================================== END SHOTS ====================================================================================
