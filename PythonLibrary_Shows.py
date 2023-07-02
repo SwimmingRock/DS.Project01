@@ -229,3 +229,68 @@ delete_subdirectory(os.path.join(directory_path, directory_name), subdirectory_t
 # END: ___________DELETE A SHOW___________
 """
 # ==================================================================================== END EXAMPLE USAGE SHOWS ====================================================================================
+
+
+
+# ==================================================================================== BEGIN EXAMPLE USAGE SHOTS ====================================================================================
+
+# BEGIN: ___________CREATE NEW SHOTS WITHIN A SHOW___________
+directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
+file_name = "character2"
+character_name = "Bailey"
+info = {
+    "Name": "Bailey",
+    "Age": 3,
+    "Occupation": "Private Investigator",
+    "Description": "A seasoned detective with a disturbing past.",
+    "Abilities": ["Sharp Shooter", "Gun Expert", "Martial arts"],
+}
+
+create_character_info(directory_path, file_name, character_name, info)
+
+# END: ___________CREATE NEW SHOTS WITHIN A SHOW___________
+
+
+# BEGIN: ___________READ A LIST OF ALL CREATED SHOTS___________
+directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
+get_json_files(directory_path)
+
+# END: ___________READ A LIST OF ALL CREATED SHOTS___________
+
+
+# BEGIN: ___________READ INFORMATION FOR A SINGLE SHOT___________
+directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
+file_name = "character1.json"
+json_data = get_json_file_info(directory_path, file_name)
+if json_data:
+    print(json_data)
+
+# END: ___________READ INFORMATION FOR A SINGLE SHOT___________
+
+"""
+# BEGIN: ___________UPDATE THE DATA FOR A SHOT___________
+directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
+file_name = "character1.json"
+new_data = {
+    "Name": "Charlie",
+    "Age": 7,
+    "Occupation": "Private Investigator",
+    "Description": "A seasoned detective with a knack for solving complex cases.",
+    "Abilities": ["Sharp intuition", "Expert deduction", "Martial Arts"],
+}
+
+edit_json_file(directory_path, file_name, new_data)
+
+# END: ___________UPDATE THE DATA FOR A SHOT___________
+
+
+
+# BEGIN: ___________DELETE A SHOT___________
+directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
+file_name = "character4.json"
+
+delete_json_file(directory_path, file_name)
+
+# END: ___________DELETE A SHOT___________
+# ==================================================================================== END EXAMPLE USAGE SHOTS ====================================================================================
+"""
