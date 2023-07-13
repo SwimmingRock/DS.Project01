@@ -1,192 +1,99 @@
-Project Description:
-The provided code represents a project that manages and organizes information about shows and shots within those shows. It allows for the creation, retrieval, modification, and deletion of shows and shots by utilizing directories and JSON files to store the relevant data. The project provides functions to create new shows and shots, read information for a single show or shot, update the data for a show or shot, and delete shows or shots.
 
-As an example I have create a main directory called "Animal Kingdom" and subdirectories(Shows) called "Dogs","Cats","Bunnys" and "Birds". Each show as a description.json file which gives you information on what the show is about. For this example I have only created shots (Character info about the characters in the show) for the Dogs Show, but you can use the same code to create shots for different shows by making changes to values the variables hold.
+# Show and Shot Manager Examples
 
-The code is broken down into 4 main sections:
-1. Begin Shows: It contains all the functions to create directories, subdirectories, list all created subdirectories...etc
-2. Begin Shots: It contain all the functions to create json files to store info about a shot (character), update, delete..etc
-3. Begin Example Usage Shows: Here are the example usage code on how to run the functions created in the Begin Shows section.
-4. Begin Example Usage Shots: Here are the example usage code on how to run the functions created in the Begin Shots section.
+The project consists of two classes: `ShowManager` and `ShotManager`. These classes provide functionality for managing shows and shots within a directory structure.
 
+## ShowManager
 
-To Run Examples:
-To run the examples, follow these steps: 
-(Note: These example code block for your understanding)
+The `ShowManager` class is responsible for creating and managing show directories. It provides methods to:
 
-1. Set up the project structure: 
-   - Make sure you have a suitable directory on your system where you want to create the project. Update the `directory_path` variable in the code examples with the desired path.
-   - Create the necessary subdirectories for shows and shots using the `create_subdirectories` function. Modify the `directory_name` and `subdirectories` variables to suit your needs.
+- Create the main directory.
+- Create subdirectories within the main directory.
+- Create JSON files within subdirectories.
+- Retrieve the description file of a subdirectory.
+- Update the description file.
+- Delete subdirectories.
 
-2. Working with Shows:
-   - Example 1: Creating new shows
+### Example Usage
 
-      ## Example Code block
-      ## BEGIN: ___________CREATE NEW SHOWS___________
-      # directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1"
-      # directory_name = "Animal_Kingdom"
-      # subdirectories = ["Dogs", "Cats", "Birds", "Bunnys"]
-      # create_subdirectories(directory_path, directory_name, subdirectories)
+```python
+import os
+import json
+import shutil
+from typing import List, Dict
 
-      ## END: ___________CREATE NEW SHOWS___________
+# ShowManager class implementation...
 
-     - Uncomment the code block under the comment "CREATE NEW SHOWS" and modify the `directory_path`, `directory_name`, and `subdirectories` variables to specify the desired directory and show names.
-     - Run the code block to create the new shows.
+# Example usage
+show_manager = ShowManager("C:/MyShows", "Animal_Kingdom")
+show_manager.create_subdirectories(["Dogs", "Cats", "Birds", "Bunnys"])
 
-   - Example 2: Reading a list of all created shows
+subdirectories_list = show_manager.get_subdirectories()
+print(subdirectories_list)
 
-      ## Example Code block
-      ## BEGIN: ___________READ A LIST OF ALL CREATED SHOWS___________
-      # subdirectories_list = get_subdirectories(os.path.join(directory_path, directory_name))
-      # print(subdirectories_list)
+subdir_name = "Cats"
+description = {
+    "Description": "This show is about a family of Cats in the Animal Kingdom",
+}
+show_manager.create_json_file(subdir_name, "description.json", description)
 
-      ## END: ___________READ A LIST OF ALL CREATED SHOWS___________
+description = show_manager.get_description_file(subdir_name)
+if description is not None:
+    print(description)
 
-     - Uncomment the code block under the comment "READ A LIST OF ALL CREATED SHOWS."
-     - Run the code block to retrieve a list of all the created shows.
+show_manager.update_description_file("Cats", {"Description": "This show is a Comedy series about Cats in the Animal Kingdom"})
+show_manager.delete_subdirectory("Cats")
+```
 
-   - Example 3: Creat/Read information for a single show
+In this example:
 
-      ## Example Code block
-      ## BEGIN: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
-      # subdir_path = os.path.join(directory_path, directory_name, "Dogs")
-      # description = {
-      #     "Description": "This show is about a family of Dogs in the Animal Kingdom",
-      # }
-      # create_json_file(subdir_path, "description.json", description)
+1. A `ShowManager` object is created with the main directory path set to `"C:/MyShows"` and the main directory name set to `"Animal_Kingdom"`.
+2. The `create_subdirectories` method is called to create the subdirectories: `"Dogs"`, `"Cats"`, `"Birds"`, and `"Bunnys"`.
+3. The `get_subdirectories` method is called to retrieve a list of subdirectories.
+4. The `create_json_file` method is used to create a description file for the `"Cats"` subdirectory.
+5. The `get_description_file` method is called to retrieve the description from the created file.
+6. The `update_description_file` method is used to update the description of the `"Cats"` subdirectory.
+7. The `delete_subdirectory` method is called to delete the `"Cats"` subdirectory.
 
-      # chosen_subdirectory = "Dogs"
-      # description = get_description_file(os.path.join(directory_path, directory_name), chosen_subdirectory)
-      # if description is not None:
-      #     print(description)
+## ShotManager
 
-      ## END: ___________CREATE/READ INFORMATION FOR A SINGLE SHOW___________
+The `ShotManager` class is responsible for managing shot files within a subdirectory. It provides methods to:
 
-     - Uncomment the code block under the comment "CREATE/READ INFORMATION FOR A SINGLE SHOW."
-     - Modify the `subdir_path` and `description` variable to specify the desired show and subdirectory.
-     - Run the code block to create a description.json file.
-     - Modify the `chosen_subdirectory` variable to specify the show description you want to read.
-     - Run the code block to retrieve the description for the chosen show.
+- Create character information files.
+- Retrieve the list of shot files within a subdirectory.
+- Retrieve information from a shot file.
+- Update a shot file.
+- Delete a shot file.
 
-   - Example 4: Updating the data for a show
+### Example Usage
 
-      ## Example Code block
-      ## BEGIN: ___________UPDATE THE DATA FOR A SHOW___________
-      # chosen_subdirectory = "Cats"
-      # updated_description = {
-      #     "Description": "This show is about a family of Dogs in the Animal Kingdom. It follows their adventures and daily lives.",
-      # }
-      # update_description_file(os.path.join(directory_path, directory_name), chosen_subdirectory, updated_description)
+```python
+import os
+import json
+from typing import Dict
 
-      ## END: ___________UPDATE THE DATA FOR A SHOW___________
+# ShotManager class implementation...
 
-     - Uncomment the code block under the comment "UPDATE THE DATA FOR A SHOW."
-     - Modify the `chosen_subdirectory`and `updated_description` variable to include the desired changes to the description.
-     - Run the code block to update the description for the chosen show.
+# Example usage
+shot_manager = ShotManager("C:/MyShows/Animal_Kingdom/Dogs", "character1")
 
-   - Example 5: Deleting a show
+shot_manager.create_character_info("character2", "Charlie", {"name": "Charlie", "age": 3, "breed": "Labrador"})
+shot_manager.get_json_files()
+print(shot_manager.get_json_file_info("character1.json")) 
 
-      ## Example Code block
-      ## BEGIN: ___________DELETE A SHOW___________
-      # subdirectory_to_delete = "Cats"
-      # delete_subdirectory(os.path.join(directory_path, directory_name), subdirectory_to_delete)
+shot_manager.edit_json_file("character1.json", {"name": "Charlie", "age": 4, "breed": "Golden Retriever"})
+shot_manager.delete_json_file("character1.json")
+```
 
-      ## END: ___________DELETE A SHOW___________
+In this example:
 
-     - Uncomment the code block under the comment "DELETE A SHOW."
-     - Modify the `subdirectory_to_delete` variable to specify the subdirectory you want to delete.
-     - Run the code block to delete the chosen show.
+1. A `ShotManager` object is created with the directory path set to `"C:/MyShows/Animal_Kingdom/Dogs"` and the subdirectory name set to `"character1"`.
+2. The `create_character_info` method is called to create a character information file for `"character2"`.
+3. The `get_json_files` method is used to retrieve the list of shot files within the subdirectory.
+4. The `get_json_file_info` method is called to retrieve information from a specific shot file.
+5. The `edit_json_file` method is used to update the information in a shot file.
+6. The `delete_json_file` method is called to delete a specific shot file.
 
-3. Working with Shots:
-   - Example 1: Creating new shots within a show
+---
 
-      ## Example Code block
-      ## BEGIN: ___________CREATE NEW SHOTS WITHIN A SHOW___________
-      # directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
-      # file_name = "character3"
-      # character_name = "Coco"
-      # info = {
-      #     "Name": "Coco",
-      #     "Age": 2,
-      #     "Occupation": "Software Engineer",
-      #     "Description": "A brilliant and accomplished software engineer.",
-      #     "Abilities": ["Problem-solving", "Strong Debugging and Troubleshooting"],
-      # }
-
-      # create_character_info(directory_path, file_name, character_name, info)
-
-      ## END: ___________CREATE NEW SHOTS WITHIN A SHOW___________
-
-     - Uncomment the code block under the comment "CREATE NEW SHOTS WITHIN A SHOW."
-     - Modify the `directory_path`, `file_name`, `character_name`, and `info` variables to specify the desired directory and shot information.
-     - Run the code block to create a new shot.
-
-   - Example 2: Reading a list of all created shots within a show
-
-      ## Example Code block
-      ## BEGIN: ___________READ A LIST OF ALL CREATED SHOTS___________
-      # directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
-      # get_json_files(directory_path)
-
-      ## END: ___________READ A LIST OF ALL CREATED SHOTS___________
-
-     - Uncomment the code block under the comment "READ A LIST OF ALL CREATED SHOTS."
-     - Modify the `directory_path` variable to specify the desired show and subdirectory.
-     - Run the code block to retrieve a list of all the created shots within the chosen show.
-
-   - Example 3: Reading information for a single shot
-
-      ## Example Code block
-      ## BEGIN: ___________READ INFORMATION FOR A SINGLE SHOT___________
-      # directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
-      # file_name = "character1.json"
-      # json_data = get_json_file_info(directory_path, file_name)
-      # if json_data:
-      #     print(json_data)
-
-      ## END: ___________READ INFORMATION FOR A SINGLE SHOT___________
-
-     - Uncomment the code block under the comment "READ INFORMATION FOR A SINGLE SHOT."
-     - Modify the `directory_path` and `file_name` variables to specify the desired show, subdirectory, and shot file.
-     - Run the code block to retrieve the information for the chosen shot.
-
-   - Example 4: Updating the data for a shot
-
-      ## Example Code block
-      ## BEGIN: ___________UPDATE THE DATA FOR A SHOT___________
-      # directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
-      # file_name = "character1.json"
-      # new_data = {
-      #     "Name": "Charlie",
-      #     "Age": 7,
-      #     "Occupation": "Private Investigator",
-      #     "Description": "A seasoned detective with a knack for solving complex cases.",
-      #     "Abilities": ["Sharp intuition", "Expert deduction", "Martial arts"],
-      # }
-
-      # edit_json_file(directory_path, file_name, new_data)
-
-      ## END: ___________UPDATE THE DATA FOR A SHOT___________
-
-     - Uncomment the code block under the comment "UPDATE THE DATA FOR A SHOT."
-     - Modify the `directory_path`, `file_name`, and `new_data`(values), variables to specify the desired show, subdirectory
-
-, shot file, and updated data.
-     - Run the code block to update the data for the chosen shot.
-
-   - Example 5: Deleting a shot
-
-      ## Example Code block
-      # BEGIN: ___________DELETE A SHOT___________
-      # directory_path = "D:/BCIT/Term 3/Data Structures/Assignment 1/Animal_Kingdom/Dogs"
-      # file_name = "character2.json"
-
-      # delete_json_file(directory_path, file_name)
-
-      ## END: ___________DELETE A SHOT___________
-
-     - Uncomment the code block under the comment "DELETE A SHOT."
-     - Modify the `directory_path` and `file_name` variables to specify the desired show, subdirectory, and shot file.
-     - Run the code block to delete the chosen shot.
-
-Remember to uncomment the desired code blocks(if commented) and modify the variables as instructed to perform the desired operations on shows and shots.
+By following the instructions and modifying the code snippets accordingly, you can create different directory structures, update show descriptions, delete subdirectories, create character information files with different details, and delete specific shot files, resulting in different outcomes based on your modifications.
