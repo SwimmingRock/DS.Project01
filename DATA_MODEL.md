@@ -38,7 +38,19 @@ Control flow statements allow for conditional execution of code and iterative op
 
 Overall, the chosen data types and structures, including strings, lists, dictionaries, classes, file I/O, and control flow statements, work together to facilitate the organization, manipulation, and storage of data related to shows and shots. These choices promote code readability, reusability, and maintainability.
 
+The Code also utilizes the principles of classes.
 
+1. Encapsulation: The code encapsulates related data and functionality within the `ShowManager` and `ShotManager` classes. Each class contains properties (attributes) that store relevant information, such as directory paths and file names. The methods (functions) defined within the classes operate on the associated data, providing a cohesive and organized way to manage shows and shots.
+
+2. Abstraction: The classes abstract away the underlying implementation details of managing shows and shots. Users of the classes do not need to know the specific file operations or directory structure; they can interact with the classes using high-level methods that perform the desired actions. This abstraction simplifies the usage of the code and makes it easier to work with shows and shots without dealing with low-level details.
+
+3. Modularity: The classes promote modularity by encapsulating related functionality. The `ShowManager` class handles operations related to creating directories, managing subdirectories, creating and updating JSON files, and deleting subdirectories. The `ShotManager` class focuses on operations specific to shots, such as creating character information, retrieving shot files, editing shot data, and deleting shot files. Each class has a well-defined responsibility and can be used independently or in conjunction with each other.
+
+4. Reusability: The classes are designed to be reusable. Multiple instances of `ShowManager` and `ShotManager` can be created to manage different shows and shots. The methods defined within the classes can be called multiple times with different inputs to perform the desired actions for various shows and shots. This reusability enhances code organization and promotes efficient management of show-related data.
+
+By employing these principles of classes, the code achieves improved code organization, code reuse, and abstraction of complex operations, making it easier to manage shows and shots in a structured and modular manner.
+
+5. Polymorphism was not used as I would like different functionalities of my code to be almost instantly reusable with code written by others. For example a colleague of mine has written a better `ShowManager` class and wants to use my code for only managing the shots. 
 
 
 
